@@ -8,6 +8,7 @@ course = [
     {"id": 4, "name": "Laisha"},
 ]
 
+
 @app.route("/app/api/course/all")
 def show():
     return jsonify(course)
@@ -16,18 +17,19 @@ def show():
 @app.route("/update/")
 def update():
     id = request.args.get("id")
-    name=request.args.get("name")
+    name = request.args.get("name")
     for i in range(0, len(course)):
         temp = course[i]["id"]
         if int(temp) == int(id):
             course[i]["name"] = name
             return jsonify(course)
 
-@app.route('/append/')
+
+@app.route("/append/")
 def append():
     id = request.args.get("id")
-    name=request.args.get("name")
-    d={'id':int(id),'name':name}
+    name = request.args.get("name")
+    d = {"id": int(id), "name": name}
     course.append(d)
     return jsonify(course)
 
@@ -46,4 +48,4 @@ def showit():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(ssl_context=("cert.pem", "key.pem"))
