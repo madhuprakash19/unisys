@@ -3,7 +3,7 @@ import requests
 
 
 def showall():
-    response = requests.get("http://127.0.0.1:5000/app/api/course/all", timeout=3)
+    response = requests.get("https://127.0.0.1:5000/app/api/course/all", timeout=3,verify=False)
     print(response.text)
 
 
@@ -27,6 +27,7 @@ def update():
     d={'id':id,'name':name}
     response = requests.get("http://127.0.0.1:5000/update/", timeout=3, params=d)
     print("\n" + response.text)
+
 while True:
     print("1.Display ALL\n2.Display one Id\n3.Append\n4.Update\n5.Exit")
     ch = int(input("Enter your choice: "))
