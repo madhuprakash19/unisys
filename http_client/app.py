@@ -46,13 +46,18 @@ def showit():
             return course[i]
     return "not found"
 
-@app.route('/post', methods=['POST'])
+
+@app.route("/post/", methods=["GET", "POST"])
 def result():
     print("HELLo")
     print(request.data)  # raw data
-    print(request.json)  # json (if content-type of application/json is sent with the request)
-    print(request.get_json(force=True))  # json (if content-type of application/json is not sent)
+    print(
+        request.json
+    )  # json (if content-type of application/json is sent with the request)
+    print(
+        request.get_json(force=True)
+    )  # json (if content-type of application/json is not sent)
 
 
 if __name__ == "__main__":
-     app.run(ssl_context=("cert.pem", "key.pem"),debug=True)
+    app.run(ssl_context=("cert.pem", "key.pem"), debug=True)
