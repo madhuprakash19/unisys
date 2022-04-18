@@ -50,13 +50,9 @@ def showit():
 @app.route("/post/", methods=["GET", "POST"])
 def result():
     print("HELLo")
-    print(request.data)  # raw data
-    print(
-        request.json
-    )  # json (if content-type of application/json is sent with the request)
-    print(
-        request.get_json(force=True)
-    )  # json (if content-type of application/json is not sent)
+    print(request.data)
+    print(request.json)
+    return "Post sucess"
 
 
 if __name__ == "__main__":
