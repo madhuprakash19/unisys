@@ -1,4 +1,7 @@
 import requests
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 course = [
     {"id": 1, "name": "Lakshana"},
@@ -15,3 +18,4 @@ res = requests.post(
 )
 print("response from server:", res.text)
 dictFromServer = res.json()
+print(dictFromServer)

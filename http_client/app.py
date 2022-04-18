@@ -47,13 +47,14 @@ def showit():
     return "not found"
 
 
-@app.route("/post/", methods=["GET", "POST"])
+@app.route("/post", methods=["GET", "POST"])
 def result():
     print("HELLo")
     print(request.data)
     print(request.json)
-    return "Post sucess"
+    print(request.get_json(force=True))
+    return {"messgae": "your request was success"}
 
 
 if __name__ == "__main__":
-    app.run(ssl_context=("cert.pem", "key.pem"), debug=True)
+    app.run(ssl_context=("cert.pem", "key.pem"), debug=False)
