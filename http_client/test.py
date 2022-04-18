@@ -2,6 +2,10 @@ from urllib import response
 import requests
 import os
 
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 def showall():
     response = requests.get("https://127.0.0.1:5000/app/api/course/all", verify=False)
