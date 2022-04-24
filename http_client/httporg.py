@@ -16,16 +16,36 @@ def responseCheck(res):
         flag = -1
     return flag
 
+
 def auth():
     username = input("Enter Username:")
     password = input("Enter Password:")
     params = (username,password)
-    r = requests.get("https://httpbin.org/basic-auth/unisys/mcp", auth=params)
-    if responseCheck(r.status_code)==1:
-        print(r.text)
-    else:
-        print("Error occured while authenticating")
+    try:
+        r = requests.get("https://httpbin.org/basic-auth/unisys/mcp", auth=params,timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.text)
+        elif r.status_code == 401:
+            print("Username or password is wrong")
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
 
+
+def redirect():
+    payload = {'url':'https://github.com/'}
+    try:
+        r = requests.get('https://httpbin.org/redirect-to', params=payload,timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.url)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
+
+
+def delay():
+    try:
+        r = requests.get("https://httpbin.org/delay/4",timeout=3)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
 
 
 
@@ -46,15 +66,17 @@ def auth():
 
 
 while True:
-    print("1.Auth\n2.Display one Id\n3.Append\n4.Update\n5.Exit\n")
+    print("\n1.Auth\n2.Redirection\n3.Delay\n9.Exit\n")
     ch = int(input("Enter your choice: "))
     if ch == 1:
         auth()
-    # elif ch == 2:
-    #     single()
-    # elif ch == 3:
-    #     append()
+    elif ch==2:
+        redirect()
+    elif ch == 3:
+        delay()
     # elif ch == 4:
     #     update()
-    else:
+    elif ch==9:
         break
+    else:
+        print("Enter correct choice")
