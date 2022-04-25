@@ -62,8 +62,9 @@ def post():
 def get():
     try:
         payload = {"page": 2, "count": 25}
-        r = requests.get("https://httpbin.org/get", params=payload))
+        r = requests.get("https://httpbin.org/get", params=payload)
         if responseCheck(r.status_code) == 1:
+            print(r.url,"\n")
             print(r.text)
     except requests.exceptions.ReadTimeout:
         print("Request Timed out")
@@ -86,7 +87,7 @@ def get():
 
 
 while True:
-    print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n9.Exit\n")
+    print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n5.Get\n9.Exit\n")
     ch = int(input("Enter your choice: "))
     if ch == 1:
         auth()
@@ -96,6 +97,8 @@ while True:
         delay()
     elif ch == 4:
         post()
+    elif ch==5:
+        get()
     elif ch==9:
         break
     else:
