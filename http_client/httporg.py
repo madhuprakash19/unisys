@@ -48,10 +48,30 @@ def delay():
         print("Request Timed out")
 
 
+def post():
+    try:
+        payload2 = {"test1": "test1Value", "test2": "test2Value"}
+        r = requests.post("https://httpbin.org/post", data=payload2,timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.text)
+            r_dict = r.json()
+            print(r_dict["form"])
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
+
+def get():
+    try:
+        payload = {"page": 2, "count": 25}
+        r = requests.get("https://httpbin.org/get", params=payload))
+        if responseCheck(r.status_code) == 1:
+            print(r.text)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
+
 
 # payload1 = {"page": 2, "count": 25}
 # r1 = requests.get("https://httpbin.org/get", params=payload1)
-# payload2 = {"username": "unisys", "password": "mcp_project"}
+
 # print(r1.text)
 
 
@@ -66,7 +86,7 @@ def delay():
 
 
 while True:
-    print("\n1.Auth\n2.Redirection\n3.Delay\n9.Exit\n")
+    print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n9.Exit\n")
     ch = int(input("Enter your choice: "))
     if ch == 1:
         auth()
@@ -74,8 +94,8 @@ while True:
         redirect()
     elif ch == 3:
         delay()
-    # elif ch == 4:
-    #     update()
+    elif ch == 4:
+        post()
     elif ch==9:
         break
     else:
