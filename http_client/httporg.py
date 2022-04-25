@@ -50,8 +50,8 @@ def delay():
 
 def post():
     try:
-        payload2 = {"test1": "test1Value", "test2": "test2Value"}
-        r = requests.post("https://httpbin.org/post", data=payload2,timeout=3)
+        payload = {"test1": "test1Value", "test2": "test2Value"}
+        r = requests.post("https://httpbin.org/post", data=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.text)
             r_dict = r.json()
@@ -62,7 +62,7 @@ def post():
 def get():
     try:
         payload = {"page": 2, "count": 25}
-        r = requests.get("https://httpbin.org/get", params=payload)
+        r = requests.get("https://httpbin.org/get", params=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.url,"\n")
             print(r.text)
@@ -70,24 +70,39 @@ def get():
         print("Request Timed out")
 
 
-# payload1 = {"page": 2, "count": 25}
-# r1 = requests.get("https://httpbin.org/get", params=payload1)
+def header():
+    try:
+        payload = {'testheader':'header_value'}
+        r = requests.get('http://httpbin.org/headers', headers=payload,timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.url,"\n")
+            print(r.text)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
 
-# print(r1.text)
+
+def put():
+    try:
+        payload = {"test1": "test1Value", "test2": "test2Value"}
+        r = requests.put("https://httpbin.org/put", params=payload,timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.url,"\n")
+            print(r.text)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
 
 
-# r2 = requests.post("https://httpbin.org/post", data=payload2)
-# r2_dict = r2.json()
-# print(r2_dict["form"])
-
-
-# r = requests.get("https://httpbin.org/basic-auth/unisys/mcp", auth=("unisys", "mcp"))
-# print(r)
-
+def showip():
+    try:
+        r = requests.get("https://httpbin.org/ip",timeout=3)
+        if responseCheck(r.status_code) == 1:
+            print(r.text)
+    except requests.exceptions.ReadTimeout:
+        print("Request Timed out")
 
 
 while True:
-    print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n5.Get\n9.Exit\n")
+    print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n5.Get\n6.Header\n7.Put\n8.Show IP\n9.Exit\n")
     ch = int(input("Enter your choice: "))
     if ch == 1:
         auth()
@@ -99,6 +114,12 @@ while True:
         post()
     elif ch==5:
         get()
+    elif ch==6:
+        header()
+    elif ch==7:
+        put()
+    elif ch==8:
+        showip()
     elif ch==9:
         break
     else:
