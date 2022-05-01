@@ -8,7 +8,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def showall():
-    response = requests.get("https://127.0.0.1:5000/app/api/course/all", timeout=3,verify=False)
+    response = requests.get("https://127.0.0.1:5000/app/api/course/all", verify=False)
     print(response.text)
 
 
@@ -39,7 +39,8 @@ def update():
         "https://127.0.0.1:5000/update/", timeout=3, params=d, verify=False
     )
     print("\n" + response.text)
-    
+
+
 while True:
     print("1.Display ALL\n2.Display one Id\n3.Append\n4.Update\n5.Exit")
     ch = int(input("Enter your choice: "))

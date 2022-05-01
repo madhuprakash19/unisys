@@ -55,4 +55,4 @@ def result():
     return {"messgae":"your request was success"}
 
 if __name__ == "__main__":
-     app.run(ssl_context=("cert.pem", "key.pem"),debug=True)
+    app.run(ssl_context=("cert.pem", "key.pem"), debug=False)
