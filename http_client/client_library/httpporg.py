@@ -17,12 +17,12 @@ def responseCheck(res):
     return flag
 
 
-def auth():
+def auth(url = "https://httpbin.org/basic-auth/unisys/mcp"):
     username = input("Enter Username:")
     password = input("Enter Password:")
     params = (username,password)
     try:
-        r = requests.get("https://httpbin.org/basic-auth/unisys/mcp", auth=params,timeout=3)
+        r = requests.get(url, auth=params,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.text)
         elif r.status_code == 401:
@@ -31,27 +31,27 @@ def auth():
         print("Request Timed out")
 
 
-def redirect():
+def redirect(url = 'https://httpbin.org/redirect-to'):
     payload = {'url':'https://github.com/'}
     try:
-        r = requests.get('https://httpbin.org/redirect-to', params=payload,timeout=3)
+        r = requests.get(url, params=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.url)
     except requests.exceptions.ReadTimeout:
         print("Request Timed out")
 
 
-def delay():
+def delay(url = "https://httpbin.org/delay/4"):
     try:
-        r = requests.get("https://httpbin.org/delay/4",timeout=3)
+        r = requests.get(url,timeout=3)
     except requests.exceptions.ReadTimeout:
         print("Request Timed out")
 
 
-def post():
+def post(url = "https://httpbin.org/post"):
     try:
         payload = {"test1": "test1Value", "test2": "test2Value"}
-        r = requests.post("https://httpbin.org/post", data=payload,timeout=3)
+        r = requests.post(url, data=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.text)
             r_dict = r.json()
@@ -59,10 +59,10 @@ def post():
     except requests.exceptions.ReadTimeout:
         print("Request Timed out")
 
-def get():
+def get(url = "https://httpbin.org/get"):
     try:
         payload = {"page": 2, "count": 25}
-        r = requests.get("https://httpbin.org/get", params=payload,timeout=3)
+        r = requests.get(url, params=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.url,"\n")
             print(r.text)
@@ -70,10 +70,10 @@ def get():
         print("Request Timed out")
 
 
-def header():
+def header(url = 'http://httpbin.org/headers'):
     try:
         payload = {'testheader':'header_value'}
-        r = requests.get('http://httpbin.org/headers', headers=payload,timeout=3)
+        r = requests.get(url, headers=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.url,"\n")
             print(r.text)
@@ -81,10 +81,10 @@ def header():
         print("Request Timed out")
 
 
-def put():
+def put(url = "https://httpbin.org/put"):
     try:
         payload = {"test1": "test1Value", "test2": "test2Value"}
-        r = requests.put("https://httpbin.org/put", params=payload,timeout=3)
+        r = requests.put(url, params=payload,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.url,"\n")
             print(r.text)
@@ -92,9 +92,9 @@ def put():
         print("Request Timed out")
 
 
-def showip():
+def showip(url = "https://httpbin.org/ip"):
     try:
-        r = requests.get("https://httpbin.org/ip",timeout=3)
+        r = requests.get(url,timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.text)
     except requests.exceptions.ReadTimeout:
