@@ -1,0 +1,19 @@
+integrationKey = "DIMS3V5QDVG9J9ABRXC4"
+secretKey = "HWVQ46nubLBxhnRlKddTltWIi3hL0fIQF2qTvLab"
+
+set http = Server.CreateObject("Chilkat_9_5_0.Http")
+
+
+url = "https://api-979bcd16.duosecurity.com/auth/v2/preauth"
+
+
+set req = Server.CreateObject("Chilkat_9_5_0.HttpRequest")
+req.AddParam "username","matt"
+
+
+ikey="DI0F5FEXJ20DFFEJ6LY0",
+skey="HbnseUfdsgypBfdKDe0iWVUkd1dp9ZR7YZS3Oeg7",
+host="api-979bcd16.duosecurity.com",
+
+http.Login = integrationKey
+http.Password = secretKey
