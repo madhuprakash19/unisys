@@ -17,3 +17,9 @@ host="api-979bcd16.duosecurity.com",
 
 http.Login = integrationKey
 http.Password = secretKey
+
+
+
+
+d = datetime.datetime.now(pytz.timezone(self.sig_timezone))
+            now = d.strftime("%a, %d %b %Y %H:%M:%S %z")

@@ -61,7 +61,7 @@ def post(url="https://httpbin.org/post"):
         print("Request Timed out")
 
 
-def get(url="https://httpbin.org/get", payload={}):
+def get(url="https://httpbin.org/get"):
     try:
         payload = {"page": 2, "count": 25}
         r = requests.get(url, params=payload, timeout=3)
@@ -97,15 +97,6 @@ def put(url="https://httpbin.org/put"):
 def showip(url="https://httpbin.org/ip"):
     try:
         r = requests.get(url, timeout=3)
-        if responseCheck(r.status_code) == 1:
-            print(r.text)
-    except requests.exceptions.ReadTimeout:
-        print("Request Timed out")
-
-
-def ping_():
-    try:
-        r = requests.get("https://api-979bcd16.duosecurity.com/auth/v2/ping", timeout=3)
         if responseCheck(r.status_code) == 1:
             print(r.text)
     except requests.exceptions.ReadTimeout:

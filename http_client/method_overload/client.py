@@ -18,7 +18,7 @@ class httpclient:
             flag = -1
         return flag
 
-    def get(self, url, params, header, pdata):
+    def post(self, url, params, header, pdata):
         try:
             r = requests.post(url, auth=params, headers=header, data=pdata, timeout=3)
             if self.responseCheck(r.status_code) == 1:
@@ -55,9 +55,12 @@ class httpclient:
 
 def main():
     test1 = httpclient()
-    # ok = {"test1": "test1Value", "test2": "test2Value"}
-    # test1.post("https://httpbin.org/post", {}, ok)
-    test1.get("https://httpbin.org/ip")
+    test1.post(
+        "https://api-979bcd16.duosecurity.com/auth/v2/preauth",
+        ("DI0F5FEXJ20DFFEJ6LY0", "HWVQ46nubLBxhnRlKddTltWIi3hL0fIQF2qTvLab"),
+        {"X-Duo-Date": "Wed, 23 May 2022 19:12:26 -0000"},
+        {},
+    )
 
 
 if __name__ == "__main__":
