@@ -1,13 +1,3 @@
 from client_library import httpporg
-
-# httpporg.password=""
-# httpporg.username="praveen"
-# httpporg.method="get"
-# httpporg.header={"Accept":"application/json"}
-# httpporg.auth("https://api-979bcd16.duosecurity.com/auth/v2/preauth")
-
-params = httpporg.post(
-    "https://api-979bcd16.duosecurity.com/auth/v2/preauth",
-    {"X-Duo-Date": "Wed, 20 May 2022 04:12:26 -0000"},
-    ("DI0F5FEXJ20DFFEJ6LY0", "HWVQ46nubLBxhnRlKddTltWIi3hL0fIQF2qTvLab"),
-)
+from client_library import httpporg
+httpporg.auth()
