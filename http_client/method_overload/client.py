@@ -1,6 +1,4 @@
 import requests
-
-
 class httpclient:
     def responseCheck(self, res):
         flag = -1
@@ -18,7 +16,7 @@ class httpclient:
             flag = -1
         return flag
 
-    def post(self, url, params, header, pdata):
+    def post(self, url, params={}, header={}, pdata={}):
         try:
             r = requests.post(url, auth=params, headers=header, data=pdata, timeout=3)
             if self.responseCheck(r.status_code) == 1:
@@ -27,8 +25,19 @@ class httpclient:
                 print("Username or password is wrong")
         except requests.exceptions.ReadTimeout:
             print("Request Timed out")
+    
+    def get(self, url, params, header, pdata):
+        print("wtf dude")
+        try:
+            r = requests.get(url, auth=params, headers=header, data=pdata, timeout=3)
+            if self.responseCheck(r.status_code) == 1:
+                print(r.text)
+            elif r.status_code == 401:
+                print("Username or password is wrong")
+        except requests.exceptions.ReadTimeout:
+            print("Request Timed out")
 
-    def post(self, url, header, pdata):
+    def post(self, url, header={}, pdata={}):
         try:
             r = requests.post(url, headers=header, data=pdata, timeout=3)
             if self.responseCheck(r.status_code) == 1:
@@ -36,32 +45,20 @@ class httpclient:
         except requests.exceptions.ReadTimeout:
             print("Request Timed out")
 
-    def post(self, url):
+    # def get(self, url):
+    #     try:
+    #         r = requests.get(url, timeout=3)
+    #         if(self.responseCheck(r.status_code)==1):
+    #             return r
+    #     except requests.exceptions.ReadTimeout:
+    #         return -1
+
+    def delete(self, url, header={}):
         try:
-            r = requests.get(url, timeout=3)
+            r = requests.delete(url, headers=header, timeout=3)
             if self.responseCheck(r.status_code) == 1:
                 print(r.text)
         except requests.exceptions.ReadTimeout:
             print("Request Timed out")
 
-    def get(self, url):
-        try:
-            r = requests.get(url, timeout=3)
-            if self.responseCheck(r.status_code) == 1:
-                print(r.text)
-        except requests.exceptions.ReadTimeout:
-            print("Request Timed out")
 
-
-def main():
-    test1 = httpclient()
-    test1.post(
-        "https://api-979bcd16.duosecurity.com/auth/v2/preauth",
-        ("DI0F5FEXJ20DFFEJ6LY0", "HWVQ46nubLBxhnRlKddTltWIi3hL0fIQF2qTvLab"),
-        {"X-Duo-Date": "Wed, 23 May 2022 19:12:26 -0000"},
-        {},
-    )
-
-
-if __name__ == "__main__":
-    main()

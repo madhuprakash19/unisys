@@ -1,6 +1,4 @@
 import requests
-
-
 def responseCheck(res):
     flag = -1
     if res >= 200 and res <= 299:
@@ -101,28 +99,3 @@ def showip(url="https://httpbin.org/ip"):
             print(r.text)
     except requests.exceptions.ReadTimeout:
         print("Request Timed out")
-
-
-# while True:
-#     print("\n1.Auth\n2.Redirection\n3.Delay\n4.Post\n5.Get\n6.Header\n7.Put\n8.Show IP\n9.Exit\n")
-#     ch = int(input("Enter your choice: "))
-#     if ch == 1:
-#         auth()
-#     elif ch==2:
-#         redirect()
-#     elif ch == 3:
-#         delay()
-#     elif ch == 4:
-#         post()
-#     elif ch==5:
-#         get()
-#     elif ch==6:
-#         header()
-#     elif ch==7:
-#         put()
-#     elif ch==8:
-#         showip()
-#     elif ch==9:
-#         break
-#     else:
-#         print("Enter correct choice")

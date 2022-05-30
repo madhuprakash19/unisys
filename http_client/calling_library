@@ -1,13 +1,26 @@
-from client_library import httpporg
-
-# httpporg.password=""
-# httpporg.username="praveen"
-# httpporg.method="get"
-# httpporg.header={"Accept":"application/json"}
-# httpporg.auth("https://api-979bcd16.duosecurity.com/auth/v2/preauth")
-
-params = httpporg.post(
-    "https://api-979bcd16.duosecurity.com/auth/v2/preauth",
-    {"X-Duo-Date": "Wed, 20 May 2022 04:12:26 -0000"},
-    ("DI0F5FEXJ20DFFEJ6LY0", "HWVQ46nubLBxhnRlKddTltWIi3hL0fIQF2qTvLab"),
-)
+from client_library.client import httpclient as hc
+def main():
+    def responseCheck(res):
+        flag = -1
+        if res >= 200 and res <= 299:
+            print("Request Success")
+            flag = 1
+        elif res >= 300 and res <= 399:
+            print("Redirection Message")
+            flag = -1
+        elif res >= 400 and res <= 499:
+            print("Client error")
+            flag = -1
+        elif res >= 500 and res <= 599:
+            print("Server error")
+            flag = -1
+        return flag
+    obj=hc()
+    r = obj.post("https://httpbin.org/post",{"test1": "test1Value", "test2": "test2Value"})
+    if r==999:
+        print("Request timed out")
+    elif responseCheck(r.status_code) == 1:
+        print(r.text)       
+        
+if __name__== '__main__':
+    main()
