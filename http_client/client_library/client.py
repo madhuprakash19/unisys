@@ -8,9 +8,9 @@ class httpclient:
     # By default allow_redirects,stream,verify is set as true and timeout is set to 3 seconds
     # If there is request read timeout,it returns 999.
     # 999 is taken as a custom exception because it is out of bound value in the response check function.
-    def get(self, url,auth=() ,params=(),allow_redirects=True,cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
+    def get(self, url,auths=() ,params=(),allow_redirects=True,cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
         try:
-            r = requests.get(url, auth=auth,params=params,allow_redirects=allow_redirects,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
+            r = requests.get(url, auth=auths,params=params,allow_redirects=allow_redirects,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
             return r
         except requests.exceptions.ReadTimeout:
             return 999

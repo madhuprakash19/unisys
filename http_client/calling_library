@@ -1,3 +1,4 @@
+
 from client_library.client import httpclient as hc
 def main():
     def responseCheck(res):
@@ -16,7 +17,7 @@ def main():
             flag = -1
         return flag
     obj=hc()
-    r = obj.post("https://httpbin.org/post",{"test1": "test1Value", "test2": "test2Value"})
+    r = obj.get("https://httpbin.org/basic-auth/unisys/mcp",('unisys','mcp'))
     if r==999:
         print("Request timed out")
     elif responseCheck(r.status_code) == 1:
