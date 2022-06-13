@@ -13,9 +13,9 @@ class httpclient:
             return r
         except requests.exceptions.ReadTimeout:
             return 999
-    def delete(self,url,allow_redirects=True, auth=(),cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
+    def delete(self,url,data={},allow_redirects=True,auth=(),cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
         try:
-            r = requests.delete(url, auth=auth,allow_redirects=allow_redirects,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
+            r = requests.delete(url,data=data,allow_redirects=allow_redirects,auth=auth,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
             return r
         except requests.exceptions.ReadTimeout:
             return 999

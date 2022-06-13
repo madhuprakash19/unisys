@@ -1,3 +1,4 @@
+
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
@@ -7,17 +8,15 @@ course = [
     {"id": 3, "name": "Nikitha"},
     {"id": 4, "name": "Laisha"},
 ]
-
-
-@app.route("/app/api/course/all")
+@app.route("/app/api/course/all",methods=['GET'])
 def show():
     return jsonify(course)
 
 
-@app.route("/update/")
+@app.route("/update/", methods=['PUT'])
 def update():
-    id = request.args.get("id")
-    name = request.args.get("name")
+    id = request.form.get("id")
+    name = request.form.get("name")
     for i in range(0, len(course)):
         temp = course[i]["id"]
         if int(temp) == int(id):
@@ -25,16 +24,16 @@ def update():
             return jsonify(course)
 
 
-@app.route("/append/")
+@app.route("/append/",methods=['POST'])
 def append():
-    id = request.args.get("id")
-    name = request.args.get("name")
+    id = request.form.get("id")
+    name = request.form.get("name")
     d = {"id": int(id), "name": name}
     course.append(d)
     return jsonify(course)
 
 
-@app.route("/showit/")
+@app.route("/showit/",methods=['GET'])
 def showit():
     id = request.args.get("id")
 
@@ -46,13 +45,17 @@ def showit():
             return course[i]
     return "not found"
 
-@app.route('/post', methods=['GET','POST'])
-def result():
-    print("HELLo")
-    print(request.data)  
-    print(request.json)  
-    print(request.get_json(force=True))  
-    return {"messgae":"your request was success"}
+@app.route("/remove/",methods=['DELETE'])
+def remove():
+    id = request.form.get("id")
 
+    for i in range(0, len(course)):
+        temp = course[i]["id"]
+        if int(temp) == int(id):
+            course.remove(course[i])
+            return jsonify(course)
+    return "ID NOT FOUND TO DELETE"
+def result():
+    request.post()
 if __name__ == "__main__":
-    app.run(ssl_context=("cert.pem", "key.pem"), debug=False)
+    app.run(host="0.0.0.0",debug=False)
