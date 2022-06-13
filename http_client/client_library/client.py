@@ -8,14 +8,12 @@ class httpclient:
     # By default allow_redirects,stream,verify is set as true and timeout is set to 3 seconds
     # If there is request read timeout,it returns 999.
     # 999 is taken as a custom exception because it is out of bound value in the response check function.
-    def get(self, url,auths=() ,params=(),allow_redirects=True,cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
+    def get(self, url, params=(), allow_redirects=True,cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
         try:
             r = requests.get(url, auth=auths,params=params,allow_redirects=allow_redirects,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
             return r
         except requests.exceptions.ReadTimeout:
             return 999
-
-
     # #While calling the post function,
     # just pass the url if any other attributes need to be passed,then pass them along with the url
     # for example,
@@ -30,8 +28,6 @@ class httpclient:
             return r
         except requests.exceptions.ReadTimeout:
             return 999
-
-
     # #While calling the delete function,
     # just pass the url if any other attributes need to be passed,then pass them along with the url
     # for example,
@@ -40,14 +36,12 @@ class httpclient:
     # By default allow_redirects,stream,verify is set as true and timeout is set to 3 seconds.
     # If there is request read timeout,it returns 999.
     # 999 is taken as a custom exception because it is out of bound value in the response check function.
-    def delete(self,url,allow_redirects=True, auth=(),cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
+    def delete(self,url,data={},allow_redirects=True,auth=(),cert='',cookies={},header={},proxies={},stream=True,timeout=3,verify=True):
         try:
-            r = requests.delete(url, auth=auth,allow_redirects=allow_redirects,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
+            r = requests.delete(url,data=data,allow_redirects=allow_redirects,auth=auth,cert=cert,cookies=cookies,headers=header,proxies=proxies,stream=stream, timeout=timeout,verify=verify)
             return r
         except requests.exceptions.ReadTimeout:
             return 999
-
-
     # #While calling the put function,
     # just pass the url if any other attributes need to be passed,then pass them along with the url
     # for example,
@@ -63,8 +57,3 @@ class httpclient:
             return r
         except requests.exceptions.ReadTimeout:
             return 999
-     
-        
-
-
-
