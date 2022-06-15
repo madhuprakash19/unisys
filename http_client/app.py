@@ -1,4 +1,5 @@
 
+import socket
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
@@ -16,7 +17,9 @@ def show():
 @app.route("/update/", methods=['PUT'])
 def update():
     id = request.form.get("id")
+    print(id)
     name = request.form.get("name")
+    print(name)
     for i in range(0, len(course)):
         temp = course[i]["id"]
         if int(temp) == int(id):
@@ -28,9 +31,23 @@ def update():
 def append():
     id = request.form.get("id")
     name = request.form.get("name")
+    print(id)
+    print(name)
     d = {"id": int(id), "name": name}
     course.append(d)
     return jsonify(course)
+
+
+@app.route("/remove/",methods=['DELETE'])
+def remove():
+    id = request.form.get("id")
+
+    for i in range(0, len(course)):
+        temp = course[i]["id"]
+        if int(temp) == int(id):
+            course.remove(course[i])
+            return jsonify(course)
+    return "ID NOT FOUND TO DELETE"
 
 
 @app.route("/showit/",methods=['GET'])
@@ -45,17 +62,6 @@ def showit():
             return course[i]
     return "not found"
 
-@app.route("/remove/",methods=['DELETE'])
-def remove():
-    id = request.form.get("id")
-
-    for i in range(0, len(course)):
-        temp = course[i]["id"]
-        if int(temp) == int(id):
-            course.remove(course[i])
-            return jsonify(course)
-    return "ID NOT FOUND TO DELETE"
-def result():
-    request.post()
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",debug=False)
+    # app.run(host="0.0.0.0",debug=False)
+    app.run(host="0.0.0.0", port=8086 ,debug=False)

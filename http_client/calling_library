@@ -17,7 +17,7 @@ def main():
             flag = -1
         return flag
     obj=hc()
-    r = obj.delete("http://192.168.43.54:5000/remove/",{"id":2})
+    r = obj.get("http://192.168.0.129:8086/app/api/course/all")
     if r==999:
         print("Request timed out")
     elif responseCheck(r.status_code) == 1:
