@@ -1,5 +1,3 @@
-
-import socket
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
@@ -29,6 +27,7 @@ def update():
 
 @app.route("/append/",methods=['POST'])
 def append():
+    print(request.content_length)
     id = request.form.get("id")
     name = request.form.get("name")
     print(id)
@@ -64,4 +63,5 @@ def showit():
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0",debug=False)
-    app.run(host="0.0.0.0", port=8086 ,debug=False)
+    app.run(host="0.0.0.0", port=8086 ,debug=True)
+

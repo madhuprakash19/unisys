@@ -17,7 +17,8 @@ def main():
             flag = -1
         return flag
     obj=hc()
-    r = obj.get("http://192.168.0.129:8086/app/api/course/all")
+    url=input("Enter the url:")
+    r = obj.get(url)
     if r==999:
         print("Request timed out")
     elif responseCheck(r.status_code) == 1:
