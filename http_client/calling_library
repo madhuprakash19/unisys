@@ -18,11 +18,72 @@ def main():
         return flag
     obj=hc()
     url=input("Enter the url:")
-    r = obj.get(url)
+
+    #Get Request
+    auth=()
+    allow_redirects=True
+    cert=''
+    cookies={}
+    header={}
+    proxies={}
+    stream=True
+    timeout=3
+    verify=True
+    r = obj.get(url,auth,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
     if r==999:
         print("Request timed out")
     elif responseCheck(r.status_code) == 1:
         print(r.content)
 
+    # #Post Request
+    # data={"id":5,"name":"test"}
+    # json={} 
+    # allow_redirects=True
+    # cert=''
+    # cookies={}
+    # header={}
+    # proxies={}
+    # stream=True
+    # timeout=3
+    # verify=True
+    # r = obj.post(url,data,json,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
+    # if r==999:
+    #     print("Request timed out")
+    # elif responseCheck(r.status_code) == 1:
+    #     print(r.content)
+
+    # #Delete Request
+    # data={"id":1}
+    # allow_redirects=True
+    # auth=()
+    # cert=''
+    # cookies={}
+    # header={}
+    # proxies={}
+    # stream=True
+    # timeout=3
+    # verify=True
+    # r = obj.delete(url,data,allow_redirects,auth,cert,cookies,header,proxies,stream,timeout,verify)
+    # if r==999:
+    #     print("Request timed out")
+    # elif responseCheck(r.status_code) == 1:
+    #     print(r.content)
+    
+    #Put Request  
+    # data={"id":1,"name":"unisys"}
+    # allow_redirects=True
+    # cert=''
+    # cookies={}
+    # header={}
+    # proxies={}
+    # stream=True
+    # timeout=3
+    # verify=True
+    # r = obj.put(url,data,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
+    # if r==999:
+    #     print("Request timed out")
+    # elif responseCheck(r.status_code) == 1:
+    #     print(r.content)
+    
 if __name__== '__main__':
     main()
