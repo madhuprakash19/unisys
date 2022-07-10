@@ -1,4 +1,3 @@
-
 from client_library.client import httpclient as hc
 def main():
     def responseCheck(res):
@@ -17,73 +16,97 @@ def main():
             flag = -1
         return flag
     obj=hc()
-    url=input("Enter the url:")
 
     #Get Request
-    auth=()
-    allow_redirects=True
-    cert=''
-    cookies={}
-    header={}
-    proxies={}
-    stream=True
-    timeout=3
-    verify=True
-    r = obj.get(url,auth,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
-    if r==999:
-        print("Request timed out")
-    elif responseCheck(r.status_code) == 1:
-        print(r.content)
+    def getRequest(url):
+        auth=()
+        allow_redirects=True
+        cert=''
+        cookies={}
+        header={}
+        proxies={}
+        stream=True
+        timeout=3
+        verify=True
+        r = obj.get(url,auth,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
+        if r==999:
+            print("Request timed out")
+        elif responseCheck(r.status_code) == 1:
+            print(r.content)
 
-    # #Post Request
-    # data={"id":5,"name":"test"}
-    # json={} 
-    # allow_redirects=True
-    # cert=''
-    # cookies={}
-    # header={}
-    # proxies={}
-    # stream=True
-    # timeout=3
-    # verify=True
-    # r = obj.post(url,data,json,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
-    # if r==999:
-    #     print("Request timed out")
-    # elif responseCheck(r.status_code) == 1:
-    #     print(r.content)
+    # Post Request
+    def postRequest(url):
+        data={"id":5,"name":"test"}
+        json={} 
+        allow_redirects=True
+        cert=''
+        cookies={}
+        header={}
+        proxies={}
+        stream=True
+        timeout=3
+        verify=True
+        r = obj.post(url,data,json,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
+        if r==999:
+            print("Request timed out")
+        elif responseCheck(r.status_code) == 1:
+            print(r.content)
 
-    # #Delete Request
-    # data={"id":1}
-    # allow_redirects=True
-    # auth=()
-    # cert=''
-    # cookies={}
-    # header={}
-    # proxies={}
-    # stream=True
-    # timeout=3
-    # verify=True
-    # r = obj.delete(url,data,allow_redirects,auth,cert,cookies,header,proxies,stream,timeout,verify)
-    # if r==999:
-    #     print("Request timed out")
-    # elif responseCheck(r.status_code) == 1:
-    #     print(r.content)
+    # Delete Request
+    def deleteRequest(url):
+        data={"id":1}
+        allow_redirects=True
+        auth=()
+        cert=''
+        cookies={}
+        header={}
+        proxies={}
+        stream=True
+        timeout=3
+        verify=True
+        r = obj.delete(url,data,allow_redirects,auth,cert,cookies,header,proxies,stream,timeout,verify)
+        if r==999:
+            print("Request timed out")
+        elif responseCheck(r.status_code) == 1:
+            print(r.content)
     
-    #Put Request  
-    # data={"id":1,"name":"unisys"}
-    # allow_redirects=True
-    # cert=''
-    # cookies={}
-    # header={}
-    # proxies={}
-    # stream=True
-    # timeout=3
-    # verify=True
-    # r = obj.put(url,data,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
-    # if r==999:
-    #     print("Request timed out")
-    # elif responseCheck(r.status_code) == 1:
-    #     print(r.content)
+    #Put Request
+    def putRequest(url): 
+        data={"id":1,"name":"unisys"}
+        allow_redirects=True
+        cert=''
+        cookies={}
+        header={}
+        proxies={}
+        stream=True
+        timeout=3
+        verify=True
+        r = obj.put(url,data,allow_redirects,cert,cookies,header,proxies,stream,timeout,verify)
+        if r==999:
+            print("Request timed out")
+        elif responseCheck(r.status_code) == 1:
+            print(r.content)
+                
+    print("1.Get Request\n2.Post Request\n3.Put Request\n4.Delete Request\n5.Exit\n")
+    while(True):
+        ch=int(input("Enter your choice: "))
+        if(ch==1):
+            url=input("Enter the url:")
+            getRequest(url)
+        elif(ch==2):
+            url=input("Enter the url:")
+            postRequest(url)
+        elif(ch==3):
+            url=input("Enter the url:")
+            putRequest(url)
+        elif(ch==4):
+            url=input("Enter the url:")
+            deleteRequest(url)
+        elif(ch==5):
+            break
+        else:
+            print("Invalid Input")
+            break
     
 if __name__== '__main__':
     main()
